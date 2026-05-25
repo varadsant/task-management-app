@@ -29,8 +29,10 @@ class Router
 
         $controller = "App\\Controllers\\{$controller}";
 
-        $controllerInstance = new $controller;
+        // echo "Controller : ".$controller; echo "<br>";
+        // echo "Method : ".$controllerMethod; echo "<br>";
 
+        $controllerInstance = new $controller;
         return call_user_func(
             [$controllerInstance, $controllerMethod]
         );
