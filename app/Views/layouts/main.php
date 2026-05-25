@@ -1,14 +1,34 @@
+<?php use App\Core\Auth; ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Task Manager</title>
+    <title>Task Management App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
 
-<nav class="navbar navbar-dark bg-dark px-3">
-    <a class="navbar-brand" href="/">Task Manager</a>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+    <a class="navbar-brand" href="/">Task Management App</a>
+    <div class="ms-auto">
+
+        <?php if (Auth::check()): ?>
+
+            <span class="text-white me-3">
+                <a href="/profile" class="text-white text-decoration-none">
+                    Welcome, <?= Auth::userName() ?>
+                </a>
+            </span>
+
+            <a href="/logout" class="btn btn-danger btn-sm">
+                Logout
+            </a>
+
+        <?php endif; ?>
+
+    </div>
+
 </nav>
 
 <div class="container mt-4">
