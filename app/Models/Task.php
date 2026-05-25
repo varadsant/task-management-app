@@ -7,10 +7,15 @@ use PDO;
 
 class Task
 {
-    public static function allByUser(int $userId)
+    public static function allByUser(int $userId, string $status = null)
     {
         $db = Database::connect();
-        $stmt = $db->prepare("SELECT * FROM tasks WHERE user_id = ? ORDER BY due_date DESC");
+        $sql = "SELECT * FROM tasks WHERE user_id = ? ";
+        if ($status) {
+            $sql .= "AND status = '". $status ."'";
+        }
+
+        $stmt = $db->prepare($sql);
         $stmt->execute([$userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }

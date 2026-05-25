@@ -1,6 +1,7 @@
 <?php
 /**
  * @var string|null $message
+ * @var string|null $currentStatus
  */
 
 ?>
@@ -23,6 +24,36 @@
     </tr>
 
 <?php else: ?>
+
+    <form method="GET" action="/tasks" class="mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <select name="status" class="form-control">
+                    <option value="">
+                        All Tasks
+                    </option>
+                    <option
+                        value="pending"
+                        <?= $currentStatus === 'pending' ? 'selected' : '' ?>
+                    >
+                        Pending
+                    </option>
+                    <option
+                        value="completed"
+                        <?= $currentStatus === 'completed' ? 'selected' : '' ?>
+                    >
+                        Completed
+                    </option>
+                </select>
+            </div>
+
+            <div class="col-md-2">
+                <button class="btn btn-secondary">
+                    Filter
+                </button>
+            </div>
+        </div>
+    </form>
 
     <table class="table table-bordered">
 

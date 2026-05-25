@@ -5,7 +5,7 @@ use Dotenv\Dotenv;
 
 session_start();
 
-var_dump($_SESSION);
+// var_dump($_SESSION);
 $dotenv = Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 

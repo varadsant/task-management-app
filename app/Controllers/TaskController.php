@@ -15,7 +15,9 @@ class TaskController
     {
         Auth::requireAuth();
 
-        $tasks = Task::allByUser($_SESSION['user_id']);
+        $status = $_GET['status'] ?? null;
+
+        $tasks = Task::allByUser($_SESSION['user_id'], $status);
 
         if(empty($tasks)) {
             View::render('tasks/index', [
@@ -27,6 +29,7 @@ class TaskController
         View::render('tasks/index', [
             'tasks' => $tasks,
             'message' => null,
+            'currentStatus' => $status
         ]);
 
     }
