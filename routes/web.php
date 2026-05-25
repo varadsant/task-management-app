@@ -17,6 +17,9 @@ $router->get('/tasks', 'TaskController@index');
 $router->get('/tasks/create', 'TaskController@create');
 $router->post('/tasks/store', 'TaskController@store');
 
+$router->get('/tasks/edit', 'TaskController@edit');
+$router->post('/tasks/update', 'TaskController@update');
+$router->get('/tasks/delete', 'TaskController@delete');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
