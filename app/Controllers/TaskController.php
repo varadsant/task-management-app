@@ -45,6 +45,8 @@ class TaskController
     {
         Auth::requireAuth();
 
+        \App\Core\Csrf::verify();
+
         $db = \App\Core\Database::connect();
 
         if (empty($_POST['name'])) {
@@ -106,7 +108,9 @@ class TaskController
     public function update()
     {
         Auth::requireAuth();
-
+        
+        \App\Core\Csrf::verify();
+        
         $db = \App\Core\Database::connect();
 
         $stmt = $db->prepare("
@@ -140,20 +144,21 @@ class TaskController
     public function delete()
     {
         Auth::requireAuth();
+        \App\Core\Csrf::verify();
 
         $db = \App\Core\Database::connect();
 
         $stmp_bkup = $db->prepare("INSERT INTO tasks_delete_bkup SELECT * FROM tasks WHERE id = ? AND user_id = ?");
 
         $stmp_bkup->execute([
-            $_GET['id'],
+            $_POST['id'],
             Auth::userId()
         ]);
 
 
         $stmt = $db->prepare("DELETE FROM tasks WHERE id = ? AND user_id = ?");
         $stmt->execute([
-            $_GET['id'],
+            $_POST['id'],
             Auth::userId()
         ]);
 

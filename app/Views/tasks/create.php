@@ -1,6 +1,9 @@
+<?php use App\Core\Csrf; ?>
+
 <h2>Create Task</h2>
 
 <form method="POST" action="/tasks/store">
+    <input type="hidden" name="_token" value="<?= Csrf::token() ?>">
 
     <div class="mb-3">
         <label>Task Name</label>

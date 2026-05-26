@@ -1,7 +1,9 @@
+<?php use App\Core\Csrf; ?>
+
 <h2>Login</h2>
 
 <form method="POST" action="/login">
-
+    <input type="hidden" name="_token" value="<?= Csrf::token() ?>">
     <div class="mb-3">
         <label>Email</label>
         <input type="email" name="email" class="form-control" required>

@@ -4,6 +4,7 @@ use App\Core\Router;
 use App\Controllers\AuthController;
 use App\Controllers\HomeController;
 use App\Controllers\TaskController;
+use App\Controllers\UserController;
 
 $router = new Router();
 
@@ -19,7 +20,10 @@ $router->post('/tasks/store', 'TaskController@store');
 
 $router->get('/tasks/edit', 'TaskController@edit');
 $router->post('/tasks/update', 'TaskController@update');
-$router->get('/tasks/delete', 'TaskController@delete');
+// $router->get('/tasks/delete', 'TaskController@delete');
+$router->post('/tasks/delete', 'TaskController@delete');
+
+$router->get('/profile', 'UserController@index');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 

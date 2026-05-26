@@ -4,6 +4,8 @@
  * @var string|null $currentStatus
  */
 
+use App\Core\Csrf;
+
 ?>
 
 <div class="d-flex justify-content-between mb-3">
@@ -85,10 +87,22 @@
                             Edit
                         </a>
 
-                        <a href="/tasks/delete?id=<?= $task['id'] ?>"
+                        <!-- <a href="/tasks/delete?id=<?= $task['id'] ?>"
                         class="btn btn-sm btn-danger">
                             Delete
-                        </a>
+                        </a> -->
+
+                        <form method="POST" action="/tasks/delete" style="display:inline;" >
+
+                            <input type="hidden" name="_token" value="<?= Csrf::token() ?>" >
+
+                            <input type="hidden" name="id" value="<?= $task['id'] ?>" >
+
+                            <button class="btn btn-sm btn-danger" onclick="return confirm('Delete this task?')" >
+                                Delete
+                            </button>
+
+                        </form>
 
                     </td>
 
