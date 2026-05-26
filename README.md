@@ -117,6 +117,17 @@ password123
 
 ---
 
+## Composer Usage
+
+This project does not use a full PHP framework such as Laravel or CodeIgniter.
+
+Composer was used only for:
+
+- PSR-4 autoloading
+- dependency management
+- loading environment variables using `vlucas/phpdotenv`
+
+
 ## Security Features
 
 - Password hashing
