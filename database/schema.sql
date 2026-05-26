@@ -23,7 +23,7 @@ CREATE TABLE tasks_delete_bkup (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     due_date DATE NOT NULL,
-    status DEFAULT 'deleted',
+    status varchar(100),
     user_id INT NOT NULL,
     deleted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
