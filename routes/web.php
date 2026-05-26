@@ -27,6 +27,7 @@ $router->post('/tasks/update', 'TaskController@update');
 $router->post('/tasks/delete', 'TaskController@delete');
 
 $router->get('/profile', 'UserController@index');
+$router->post('/profile/update', 'UserController@update');
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
