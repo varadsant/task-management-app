@@ -1,4 +1,9 @@
-<?php use App\Core\Auth; ?>
+<?php 
+
+use App\Core\Auth; 
+use App\Core\Session;
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -31,11 +36,35 @@
 
 </nav>
 
+<?php if ($success = Session::getFlash('success')): ?>
+
+    <div class="alert alert-success flash-message">
+        <?= $success ?>
+        <button onclick="this.parentElement.remove()">×</button>
+    </div>
+
+<?php endif; ?>
+
+<?php if ($error = Session::getFlash('error')): ?>
+
+    <div class="alert alert-danger flash-message">
+        <?= $error ?>
+        <button onclick="this.parentElement.remove()">×</button>
+    </div>
+
+<?php endif; ?>
+
 <div class="container mt-4">
 
     <?= $content ?? '' ?>
 
 </div>
+
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.flash-message').forEach(el => el.remove());
+    }, 3000);
+</script>
 
 </body>
 </html>

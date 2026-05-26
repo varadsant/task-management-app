@@ -47,6 +47,18 @@ class TaskController
 
         $db = \App\Core\Database::connect();
 
+        if (empty($_POST['name'])) {
+
+            \App\Core\Session::flash(
+                'error',
+                'Task name is required'
+            );
+
+            header('Location: /tasks/create');
+            exit;
+        }
+        
+
         $name = $_POST['name'] ?? '';
         $due_date = $_POST['due_date'] ?? '';
         $status = $_POST['status'] ?? 'pending';
@@ -60,6 +72,11 @@ class TaskController
             $due_date,
             $status
         ]);
+
+        \App\Core\Session::flash(
+            'success',
+            'Task created successfully'
+        );
 
         header('Location: /tasks');
         exit;
@@ -110,6 +127,11 @@ class TaskController
             Auth::userId()
         ]);
 
+        \App\Core\Session::flash(
+            'success',
+            'Task updated successfully'
+        );
+
         header('Location: /tasks');
 
         exit;
@@ -134,6 +156,11 @@ class TaskController
             $_GET['id'],
             Auth::userId()
         ]);
+
+        \App\Core\Session::flash(
+            'success',
+            'Task deleted successfully'
+        );
 
         header('Location: /tasks');
         exit;
