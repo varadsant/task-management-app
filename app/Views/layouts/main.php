@@ -29,6 +29,16 @@ use App\Core\Session;
             <a href="/logout" class="btn btn-danger btn-sm">
                 Logout
             </a>
+                
+        <?php else: ?>
+
+            <a href="/login" class="btn btn-outline-light btn-sm me-2">
+                Login
+            </a>
+
+            <a href="/register" class="btn btn-primary btn-sm">
+                Register
+            </a>
 
         <?php endif; ?>
 

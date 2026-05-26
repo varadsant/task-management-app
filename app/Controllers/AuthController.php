@@ -55,9 +55,81 @@ class AuthController
         exit;
     }
 
-    public function register()
+    public function showRegister()
     {
         View::render('auth/register');
+    }
+
+    public function register()
+    {
+        \App\Core\Csrf::verify();
+
+        $name = trim($_POST['name']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+
+        if (empty($name) || empty($email) || empty($password))
+        {
+            \App\Core\Session::flash(
+                'error',
+                'All fields are required'
+            );
+
+            header('Location: /register');
+            exit;
+        }
+
+        $db = Database::connect();
+
+        $stmt = $db->prepare("
+            SELECT id FROM users
+            WHERE email = ?
+        ");
+
+        $stmt->execute([$email]);
+
+        if ($stmt->fetch()) {
+
+            \App\Core\Session::flash(
+                'error',
+                'Email already exists'
+            );
+
+            header('Location: /register');
+            exit;
+        }
+
+        $hashedPassword = password_hash(
+            $password,
+            PASSWORD_DEFAULT
+        );
+
+        $stmt = $db->prepare("
+            INSERT INTO users (
+                name,
+                email,
+                password
+            )
+            VALUES (?, ?, ?)
+        ");
+
+        $stmt->execute([
+            $name,
+            $email,
+            $hashedPassword
+        ]);
+
+        $_SESSION['user_id'] = $db->lastInsertId();
+
+        $_SESSION['user_name'] = $name;
+
+        \App\Core\Session::flash(
+            'success',
+            'Account created successfully'
+        );
+
+        header('Location: /tasks');
+        exit;
     }
 }
 
