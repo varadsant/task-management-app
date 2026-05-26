@@ -18,16 +18,8 @@ use App\Core\Csrf;
 
 </div>
 
-<?php if(empty($tasks)): ?>
-    <tr>
-        <td colspan="4" class="text-center">
-            <?= $message ?>
-        </td>
-    </tr>
 
-<?php else: ?>
-
-    <form method="GET" action="/tasks" class="mb-3">
+<form method="GET" action="/tasks" class="mb-3">
         <div class="row">
             <div class="col-md-4">
                 <select name="status" class="form-control">
@@ -57,6 +49,18 @@ use App\Core\Csrf;
         </div>
     </form>
 
+
+<?php if(empty($tasks)): ?>
+    <tr>
+        <td colspan="4" class="text-center text-muted py-4">
+            <?= $message ?>
+        </td>
+    </tr>
+
+<?php else: ?>
+
+    
+
     <table class="table table-bordered">
 
         <thead>
@@ -78,8 +82,17 @@ use App\Core\Csrf;
 
                     <td><?= $task['due_date'] ?></td>
 
-                    <td><?= ucfirst($task['status']) ?></td>
-
+                    <td>
+                        <?php if($task['status'] === 'completed'): ?>
+                            <span class="badge bg-success">
+                                Completed
+                            </span>
+                        <?php else: ?>
+                            <span class="badge bg-warning text-dark">
+                                Pending
+                            </span>
+                        <?php endif; ?>
+                    </td>
                     <td>
 
                         <a href="/tasks/edit?id=<?= $task['id'] ?>"

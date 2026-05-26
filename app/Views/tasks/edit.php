@@ -1,67 +1,62 @@
 <?php
 
 /** @var array $task */
+use \App\Core\Csrf;
 
 ?>
 
 <h2>Edit Task</h2>
 
-<form method="POST" action="/tasks/update?id=<?= $task['id'] ?>">
+<div class="card shadow-sm">
+<div class="card-body">
 
-    <div class="mb-3">
+    <form method="POST" action="/tasks/update?id=<?= $task['id'] ?>">
+        <input type="hidden" name="_token" value="<?= Csrf::token() ?>">
 
-        <label>Task Name</label>
+        <div class="mb-3">
 
-        <input
-            type="text"
-            name="name"
-            class="form-control"
-            value="<?= htmlspecialchars($task['name']) ?>"
-            required
-        >
+            <label>Task Name</label>
 
-    </div>
+            <input type="text" name="name" class="form-control" value="<?= htmlspecialchars($task['name']) ?>" required >
 
-    <div class="mb-3">
+        </div>
 
-        <label>Due Date</label>
+        <div class="mb-3">
 
-        <input
-            type="date"
-            name="due_date"
-            class="form-control"
-            value="<?= $task['due_date'] ?>"
-            required
-        >
+            <label>Due Date</label>
 
-    </div>
+            <input type="date" name="due_date" class="form-control" value="<?= $task['due_date'] ?>" required >
 
-    <div class="mb-3">
+        </div>
 
-        <label>Status</label>
+        <div class="mb-3">
 
-        <select name="status" class="form-control">
+            <label>Status</label>
 
-            <option
-                value="pending"
-                <?= $task['status'] === 'pending' ? 'selected' : '' ?>
-            >
-                Pending
-            </option>
+            <select name="status" class="form-control">
 
-            <option
-                value="completed"
-                <?= $task['status'] === 'completed' ? 'selected' : '' ?>
-            >
-                Completed
-            </option>
+                <option
+                    value="pending"
+                    <?= $task['status'] === 'pending' ? 'selected' : '' ?>
+                >
+                    Pending
+                </option>
 
-        </select>
+                <option
+                    value="completed"
+                    <?= $task['status'] === 'completed' ? 'selected' : '' ?>
+                >
+                    Completed
+                </option>
 
-    </div>
+            </select>
 
-    <button class="btn btn-primary">
-        Update Task
-    </button>
+        </div>
 
-</form>
+        <button class="btn btn-primary">
+            Update Task
+        </button>
+
+    </form>
+</div>
+</div>

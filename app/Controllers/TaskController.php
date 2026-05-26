@@ -21,7 +21,8 @@ class TaskController
 
         if(empty($tasks)) {
             View::render('tasks/index', [
-                'message' => 'No tasks found. Create your first task!',
+                'message' => 'No tasks found.',
+                'currentStatus' => $status,
             ]);
             return;
         }

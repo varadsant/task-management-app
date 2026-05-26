@@ -1,40 +1,32 @@
 <?php use App\Core\Csrf; ?>
 
 <h2>Create Task</h2>
+<div class="card shadow-sm">
+    <div class="card-body">
+        <form method="POST" action="/tasks/store">
+            <input type="hidden" name="_token" value="<?= Csrf::token() ?>">
 
-<form method="POST" action="/tasks/store">
-    <input type="hidden" name="_token" value="<?= Csrf::token() ?>">
+            <div class="mb-3">
+                <label>Task Name</label>
+                <input type="text" name="name" class="form-control" required >
+            </div>
 
-    <div class="mb-3">
-        <label>Task Name</label>
-        <input
-            type="text"
-            name="name"
-            class="form-control"
-            required
-        >
+            <div class="mb-3">
+                <label>Due Date</label>
+                <input type="date" name="due_date" class="form-control" required >
+            </div>
+
+            <div class="mb-3">
+                <label>Status</label>
+                <select name="status" class="form-control">
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                </select>
+            </div>
+
+            <button class="btn btn-success">
+                Save Task
+            </button>
+        </form>
     </div>
-
-    <div class="mb-3">
-        <label>Due Date</label>
-        <input
-            type="date"
-            name="due_date"
-            class="form-control"
-            required
-        >
-    </div>
-
-    <div class="mb-3">
-        <label>Status</label>
-        <select name="status" class="form-control">
-            <option value="pending">Pending</option>
-            <option value="completed">Completed</option>
-        </select>
-    </div>
-
-    <button class="btn btn-success">
-        Save Task
-    </button>
-
-</form>
+</div>

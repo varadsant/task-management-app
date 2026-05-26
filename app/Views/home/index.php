@@ -1,13 +1,16 @@
-<?php
-/**
- * @var string $title_name
- */
-?>
-<h1><?php echo $title_name; ?></h1>
 
-<a href="/tasks" class="btn btn-primary mb-3">
-    View My Tasks
-</a>
+<div class="text-center py-5">
 
-<p>Welcome to the Task Management System.</p>
+    <h1 class="display-5 fw-bold">
+        Task Management System
+    </h1>
 
+    <p class="lead text-muted">
+        Manage your daily tasks efficiently.
+    </p>
+
+    <a href="/tasks" class="btn btn-primary btn-lg mt-3">
+        View Tasks
+    </a>
+
+</div>
