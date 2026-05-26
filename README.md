@@ -78,9 +78,15 @@ task_management
 
 Import the SQL schema from:
 
+```bash
+mysql -u root -p
+```
+
 ```txt
-database/schema.sql
-database/seed.sql
+use task_management;
+
+source database/schema.sql;
+source database/seed.sql;
 ```
 
 ---
