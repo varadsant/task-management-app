@@ -2,8 +2,6 @@
 
 /** @var array $user */
 
-var_dump($user);
-
 ?>
 
 <h2>User Profile</h2>

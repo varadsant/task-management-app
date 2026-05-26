@@ -6,6 +6,7 @@
 
 use App\Core\Csrf;
 
+
 ?>
 
 <div class="d-flex justify-content-between mb-3">
@@ -74,7 +75,9 @@ use App\Core\Csrf;
 
         <tbody>
 
-                <?php foreach ($tasks as $task): ?>
+                <?php foreach ($tasks as $task): 
+                    $changeStatus = $task['status'] === 'pending'? 'completed' : 'pending';
+                ?>
 
                 <tr>
 
@@ -117,6 +120,18 @@ use App\Core\Csrf;
 
                         </form>
 
+                        <form method="POST" action="/tasks/update?id=<?= $task['id'] ?>" style="display:inline;" >
+
+                            <input type="hidden" name="_token" value="<?= Csrf::token() ?>" >
+                            <input type="hidden" name="name" value="<?= htmlspecialchars($task['name']) ?>" >
+                            <input type="hidden" name="due_date" value="<?= $task['due_date'] ?>" >
+                            <input type="hidden" name="status" value="<?= $changeStatus ?>" >
+
+                            <button class="btn btn-sm btn-secondary" onclick="return confirm('Change the Status?')" >
+                                <?= $task['status'] === 'pending' ? 'Mark Completed' : 'Mark Pending' ?>
+                            </button>
+
+                        </form>
                     </td>
 
                 </tr>
